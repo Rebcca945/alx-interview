@@ -1,35 +1,19 @@
 #!/usr/bin/python3
-"""function  returns the perimeter of the island described in grid"""
-    
+"""returns the perimeter of the island described in grid"""
+
+
 def island_perimeter(grid):
-    """
-    grid: is a list of list of integers:
-            0 represents water
-            1 represents land
-    """
-    x = len(grid)
-    y = len(grid[0])
-    if(x==0 or y==0):
-        return 0
-    else:
-        perimeter = 0
-        for i in range(0,x):
-            for j in range(0,y):
-                if(grid[i][j]==1):
-                    if(i-1<0):
-                        perimeter = perimeter+1
-                    elif(grid[i-1][j]==0):
-                        perimeter = perimeter+1
-                    if(i+1==x):
-                        perimeter = perimeter+1
-                    elif(grid[i+1][j]==0):
-                        perimeter = perimeter+1
-                    if(j-1<0):
-                        perimeter = perimeter+1
-                    elif(grid[i][j-1]==0):
-                        perimeter = perimeter+1
-                    if(j+1==y):
-                        perimeter = perimeter+1
-                    elif(grid[i][j+1]==0):
-                        perimeter = perimeter+1
-        return perimeter
+    """returns the perimeter of the island described in grid"""
+    perimeter = 0
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                # cells with 2 sides touching other cells on top and bottom
+                if i > 0 and grid[i - 1][j] == 1:
+                    perimeter -= 2
+                # cells with 2 sides touching other cells left and right
+                if j > 0 and grid[i][j - 1] == 1:
+                    perimeter -= 2
+
+    return perimeter
